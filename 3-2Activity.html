@@ -107,33 +107,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-1" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Title: <span class="dv">3</span><span class="op">-</span><span class="dv">2</span> Activity</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">format</span>:</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    html:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        embed<span class="op">-</span>resources: true</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 <p>Read this notebook from top to bottom and fill in the code as you go. Work together and discuss with other students in the class. Try to resolve any errors on your own first, but don’t get stuck; ask for help!</p>
 <p>In addition to writing and running code, be sure to examine any output and interpret the results before moving on.</p>
 <p>For many of these questions, there are several approaches, and there is no single right answer. You should try a few different things and compare with your classmates.</p>
 <p>We will use <code>scikit-learn</code> extensively later, but for this activity you might want to stick with <code>pandas</code>.</p>
-<div id="cell-4" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="ames---recommending-similar-homes" class="level2">
 <h2 class="anchored" data-anchor-id="ames---recommending-similar-homes">Ames - Recommending Similar Homes</h2>
 <p>1. Suppose that you really like house 0 in the Ames housing data set, but it is too expensive. Find cheaper homes that are similar to it — in terms of living area, number of bedrooms, number of bathrooms — by calculating distances from house 0. You might want to try different distance metrics and different scaling methods; how sensitive are your results to these choices?</p>
 <p>Be sure to actually look at the profiles of the homes that your algorithm picked out as most similar (based on these 3 variables). Do they make sense?</p>
 <p><strong><em>Think:</em> If the goal is to find a “good deal” on a similar house, should sale price be included as a variable in your distance metric?</strong></p>
-<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="4d7c9970-c705-43a8-fd3b-80c4ed4e689a">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use Ames Dataset:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Gr Liv Area"</span>, <span class="st">"Bathrooms"</span>]]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="4d7c9970-c705-43a8-fd3b-80c4ed4e689a">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use Ames Dataset:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Gr Liv Area"</span>, <span class="st">"Bathrooms"</span>]]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div id="df-bd78add4-27ea-453f-ad6c-30d4fca3620b" class="colab-df-container">
     <div>
@@ -354,10 +346,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="55de3c8e-1f4e-41a0-c9ed-2921130dd056">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="55de3c8e-1f4e-41a0-c9ed-2921130dd056">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div id="df-40df8872-8ab8-4179-ae21-4f706abde558" class="colab-df-container">
     <div>
@@ -578,10 +570,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="aacafbbf-3916-4809-9e3e-2c1df55145bd">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate distances from house 0</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((df_housing_scaled <span class="op">-</span> df_housing_scaled.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="aacafbbf-3916-4809-9e3e-2c1df55145bd">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate distances from house 0</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((df_housing_scaled <span class="op">-</span> df_housing_scaled.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
@@ -645,9 +637,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="34dc598b-02df-4550-d0ee-174a9d77fdaa">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="34dc598b-02df-4550-d0ee-174a9d77fdaa">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
@@ -711,8 +703,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-11" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="e17aecaf-f60f-4229-b64c-87c7639891f9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="e17aecaf-f60f-4229-b64c-87c7639891f9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div id="df-d1b379e7-3d74-445a-a960-dc56d3a1d733" class="colab-df-container">
     <div>
@@ -872,12 +864,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>House 731 is very similar in terms of bedrooms, bathrooms, and living area to house 0, but has a much lower price at $137,000 compared to $215,000</p>
 <p>2. Continuing part 1. Suppose that you really like house 0 in the data set, but it is too expensive. Find cheaper homes that are similar to it — in terms of living area, number of bedrooms, number of bathrooms, <strong>and House Style</strong> — by calculating distances from house 0. You might want to try different distance metrics and different scaling methods; how sensitive are your results to these choices?</p>
 <p>Be sure to actually look at the profiles of the homes that your algorithm picked out as most similar. Do they make sense?</p>
-<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="ca46a9b3-4220-418e-f7fc-87241a5e01b8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Ames dataset and the right variables</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Gr Liv Area"</span>, <span class="st">"Bathrooms"</span>]]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="ca46a9b3-4220-418e-f7fc-87241a5e01b8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use Ames dataset and the right variables</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Gr Liv Area"</span>, <span class="st">"Bathrooms"</span>]]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div id="df-7e0d0db9-924f-47df-a270-938e20deda28" class="colab-df-container">
     <div>
@@ -1098,10 +1090,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="5e2fde84-86a5-4b7b-e7dd-7d449f4146ed">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-14" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="5e2fde84-86a5-4b7b-e7dd-7d449f4146ed">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <div id="df-a76a5f5c-d187-4daf-89ef-a9b459c2ba8a" class="colab-df-container">
     <div>
@@ -1322,10 +1314,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:478}}" data-outputid="12a027d4-b2e7-4f1b-84ee-907922d821fb">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create dummy variable for house style where 1 is 1Story and 0 is everything else</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st<span class="op">=</span>pd.get_dummies(df_housing_quant, [<span class="st">"House Style"</span>])<span class="op">*</span><span class="dv">1</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:478}}" data-outputid="12a027d4-b2e7-4f1b-84ee-907922d821fb">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Create dummy variable for house style where 1 is 1Story and 0 is everything else</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st<span class="op">=</span>pd.get_dummies(df_housing_quant, [<span class="st">"House Style"</span>])<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <div id="df-1ebc4343-c2a5-4b72-bd11-0a3d38f3804a" class="colab-df-container">
     <div>
@@ -1654,12 +1646,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-17" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>final_housing<span class="op">=</span>df_housing_scaled.merge(df_housing_dummies_st[<span class="st">"House Style_1Story"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-16" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>final_housing<span class="op">=</span>df_housing_scaled.merge(df_housing_dummies_st[<span class="st">"House Style_1Story"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="d0f7fb0f-f45f-4250-9d1e-1844b731c924">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((final_housing <span class="op">-</span> final_housing.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-17" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="d0f7fb0f-f45f-4250-9d1e-1844b731c924">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((final_housing <span class="op">-</span> final_housing.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 
@@ -1723,9 +1715,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="11724e74-552f-4786-9e1f-db202c20f938">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="11724e74-552f-4786-9e1f-db202c20f938">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 
@@ -1789,8 +1781,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-20" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:645}}" data-outputid="239f8982-c614-487e-e48b-76285b8a6c23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:645}}" data-outputid="239f8982-c614-487e-e48b-76285b8a6c23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <div id="df-f9dc0f0c-b437-4f3a-8df6-2eca0e50ef20" class="colab-df-container">
     <div>
@@ -1951,12 +1943,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>3. Continuing parts 1 and 2. Suppose that you really like house 0 in the data set, but it is too expensive. Find cheaper homes that are similar to it, by calculating distances. You can <strong>choose the variables to include, but include both quantitative and categorical variables</strong>. Be sure to actually look at the profiles of the homes that your algorithm picked out as most similar. Do they make sense?</p>
 <p>You might want to try different distance metrics and different scaling methods; how sensitive are your results to these choices?</p>
 <p><em>Hint:</em> There are many variables in the data set. Do not attempt to compute distance based on all the variables! You will want to pare down the number of variables, but be sure to include a mixture of categorical and quantitative variables. Refer to the <a href="https://ww2.amstat.org/publications/jse/v19n3/decock/DataDocumentation.txt">data documentation</a> for information about the variables.</p>
-<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="65670f85-ddcc-4bab-943f-572d02bb38fd">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Dataset and chosen variables</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Overall Cond"</span>, <span class="st">"Bathrooms"</span>]]</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-22" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="65670f85-ddcc-4bab-943f-572d02bb38fd">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Dataset and chosen variables</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df_housing <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/kevindavisross/data301/main/data/AmesHousing.txt"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df_housing[<span class="st">"Bathrooms"</span>] <span class="op">=</span> df_housing[<span class="st">"Full Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Full Bath"</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (df_housing[<span class="st">"Half Bath"</span>] <span class="op">+</span> df_housing[<span class="st">"Bsmt Half Bath"</span>])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df_housing_quant <span class="op">=</span> df_housing[[<span class="st">"Bedroom AbvGr"</span>, <span class="st">"Overall Cond"</span>, <span class="st">"Bathrooms"</span>]]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df_housing_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <div id="df-fccc11ab-0586-416a-a000-b70924f07051" class="colab-df-container">
     <div>
@@ -2177,10 +2169,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="1f6716b2-89fd-42e9-e5f0-f78ab0b05b04">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-23" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:423}}" data-outputid="1f6716b2-89fd-42e9-e5f0-f78ab0b05b04">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize The variables as Standard Deviations Away from the Mean</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_housing_scaled <span class="op">=</span> (df_housing_quant <span class="op">-</span> df_housing_quant.mean()) <span class="op">/</span> df_housing_quant.std()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_housing_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <div id="df-6eb550a2-6980-4a02-8693-ec79a0bdaa5b" class="colab-df-container">
     <div>
@@ -2401,9 +2393,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-25" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:461}}" data-outputid="9f2ff26f-1e33-4a0a-a677-e5ca119118a9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st<span class="op">=</span>pd.get_dummies(df_housing, columns<span class="op">=</span>[<span class="st">"Neighborhood"</span>])<span class="op">*</span><span class="dv">1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:461}}" data-outputid="9f2ff26f-1e33-4a0a-a677-e5ca119118a9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st<span class="op">=</span>pd.get_dummies(df_housing, columns<span class="op">=</span>[<span class="st">"Neighborhood"</span>])<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_housing_dummies_st</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <div id="df-6d615a88-177f-450a-8450-015873c69d5e" class="colab-df-container">
     <div>
@@ -2840,12 +2832,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-26" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>final_housing<span class="op">=</span>df_housing_scaled.merge(df_housing_dummies_st[<span class="st">"Neighborhood_NAmes"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-25" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>final_housing<span class="op">=</span>df_housing_scaled.merge(df_housing_dummies_st[<span class="st">"Neighborhood_NAmes"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="5a7dc6d4-1eeb-4ecb-ef1a-6da7ed8ddd45">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((final_housing <span class="op">-</span> final_housing.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-26" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="5a7dc6d4-1eeb-4ecb-ef1a-6da7ed8ddd45">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> np.sqrt(((final_housing <span class="op">-</span> final_housing.loc[<span class="dv">0</span>]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 <div>
 
@@ -2909,9 +2901,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="15650db4-9d5a-4678-9d73-4993d87d6a0b">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:458}}" data-outputid="15650db4-9d5a-4678-9d73-4993d87d6a0b">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
 <div>
 
@@ -2975,8 +2967,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:645}}" data-outputid="bee4c96b-51da-4cbf-a300-58422bf5e13c">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:645}}" data-outputid="bee4c96b-51da-4cbf-a300-58422bf5e13c">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sorteddistance.to_frame(name<span class="op">=</span><span class="st">'Distance'</span>).merge(df_housing[[<span class="st">"SalePrice"</span>]], left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <div id="df-52bcc00c-2b13-483c-b700-923a79b822a3" class="colab-df-container">
     <div>
@@ -3138,12 +3130,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="colleges-similar-to-cal-poly" class="level2">
 <h2 class="anchored" data-anchor-id="colleges-similar-to-cal-poly">Colleges similar to Cal Poly</h2>
 <p>We’ll use data from the <a href="https://collegescorecard.ed.gov/">College Scorecard data</a> to find colleges and universities that are similar to Cal Poly.</p>
-<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:804}}" data-outputid="ee46e293-0b12-41f2-d1e2-543a06a3db07">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_college <span class="op">=</span> pd.read_csv(<span class="st">"https://datasci112.stanford.edu/data/college_attributes.csv"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df_college.set_index(<span class="st">"Institution"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>df_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:804}}" data-outputid="ee46e293-0b12-41f2-d1e2-543a06a3db07">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_college <span class="op">=</span> pd.read_csv(<span class="st">"https://datasci112.stanford.edu/data/college_attributes.csv"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_college.set_index(<span class="st">"Institution"</span>, inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>df_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="47">
 <div id="df-a201c724-0f53-46d8-aab4-d1c050615200" class="colab-df-container">
     <div>
@@ -3605,12 +3597,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We’ll want to single out Cal Poly, which we can do like this.</p>
-<div id="cell-34" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="243fd5e8-bcc0-4312-bf91-b4659b3abfce">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>school_name <span class="op">=</span> <span class="st">"California Polytechnic State University-San Luis Obispo"</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>cp <span class="op">=</span> df_college.loc[school_name]</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>cp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-outputid="243fd5e8-bcc0-4312-bf91-b4659b3abfce">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>school_name <span class="op">=</span> <span class="st">"California Polytechnic State University-San Luis Obispo"</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cp <span class="op">=</span> df_college.loc[school_name]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>cp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <div>
 
@@ -3806,9 +3798,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>1. Based on only the admission rate and the number of undergraduates, what schools are most similar to Cal Poly? Specify how you’re making this decision.</p>
-<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="d7368d99-9b5a-4529-e8ff-e0ab08d04df1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_college_quant<span class="op">=</span>df_college[[<span class="st">"AdmissionRate"</span>, <span class="st">"Undergraduates"</span>]]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_college_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-35" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="d7368d99-9b5a-4529-e8ff-e0ab08d04df1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_college_quant<span class="op">=</span>df_college[[<span class="st">"AdmissionRate"</span>, <span class="st">"Undergraduates"</span>]]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_college_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <div id="df-99334e1a-4bec-461d-b9bd-e2e45aebe11b" class="colab-df-container">
     <div>
@@ -4022,10 +4014,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="582e8740-6701-4a75-a796-5a0614f912dc">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df_college_scaled <span class="op">=</span> (df_college_quant <span class="op">-</span> df_college_quant.mean()) <span class="op">/</span> df_college_quant.std()</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df_college_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-36" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="582e8740-6701-4a75-a796-5a0614f912dc">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_college_scaled <span class="op">=</span> (df_college_quant <span class="op">-</span> df_college_quant.mean()) <span class="op">/</span> df_college_quant.std()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>df_college_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="51">
 <div id="df-133b1d09-2be7-4c6a-9d44-844ac53c8a0b" class="colab-df-container">
     <div>
@@ -4239,9 +4231,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="a95886ca-2641-4992-ee26-950df45bea01">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((df_college_scaled<span class="op">-</span>df_college_scaled.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="a95886ca-2641-4992-ee26-950df45bea01">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((df_college_scaled<span class="op">-</span>df_college_scaled.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
 <div>
 
@@ -4309,9 +4301,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-39" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="c49c7df6-e088-4040-f1a2-4866992ac0c5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-38" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="c49c7df6-e088-4040-f1a2-4866992ac0c5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <div>
 
@@ -4381,9 +4373,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>UCSB is the most similar to Cal Poly in terms of undergraduates and Admission Rate</p>
 <p>2. Now consider the admission rate, the number of undergraduates, and also the <a href="https://en.wikipedia.org/wiki/Carnegie_Classification_of_Institutions_of_Higher_Education">Carnegie classification</a> of the type of school, and the ownership (public, private, etc.) Based on these variables, what schools are most similar to Cal Poly? Specify how you’re making this decision.</p>
-<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="4f8f1660-4d8b-449b-dc3b-e744a218abcf">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_college_quant<span class="op">=</span>df_college[[<span class="st">"AdmissionRate"</span>, <span class="st">"Undergraduates"</span>]]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_college_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="4f8f1660-4d8b-449b-dc3b-e744a218abcf">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df_college_quant<span class="op">=</span>df_college[[<span class="st">"AdmissionRate"</span>, <span class="st">"Undergraduates"</span>]]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df_college_quant</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <div id="df-38e05097-adbc-4a2a-9b3f-51ad8f342644" class="colab-df-container">
     <div>
@@ -4597,10 +4589,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="96682212-db2b-4589-9543-3c3851d048f7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_college_scaled <span class="op">=</span> (df_college_quant <span class="op">-</span> df_college_quant.mean()) <span class="op">/</span> df_college_quant.std()</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>df_college_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="96682212-db2b-4589-9543-3c3851d048f7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_college_scaled <span class="op">=</span> (df_college_quant <span class="op">-</span> df_college_quant.mean()) <span class="op">/</span> df_college_quant.std()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>df_college_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <div id="df-59bc8f2e-235e-43ae-9b11-6e7bea88b558" class="colab-df-container">
     <div>
@@ -4814,9 +4806,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:822}}" data-outputid="c449a089-dc43-4d8c-8382-aa9f6f200363">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_college_dummies_ownership<span class="op">=</span>pd.get_dummies(df_college, columns<span class="op">=</span>[<span class="st">"Ownership"</span>])<span class="op">*</span><span class="dv">1</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_college_dummies_ownership</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-43" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:822}}" data-outputid="c449a089-dc43-4d8c-8382-aa9f6f200363">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df_college_dummies_ownership<span class="op">=</span>pd.get_dummies(df_college, columns<span class="op">=</span>[<span class="st">"Ownership"</span>])<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_college_dummies_ownership</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
 <div id="df-dd6fabc5-79d4-4659-b592-8230aecc8d81" class="colab-df-container">
     <div>
@@ -5277,9 +5269,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:856}}" data-outputid="475f43e1-71bf-443b-9e9b-f1d4486221b3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df_college_dummies_type<span class="op">=</span>pd.get_dummies(df_college, columns<span class="op">=</span>[<span class="st">"CarnegieClassification"</span>])<span class="op">*</span><span class="dv">1</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>df_college_dummies_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:856}}" data-outputid="475f43e1-71bf-443b-9e9b-f1d4486221b3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_college_dummies_type<span class="op">=</span>pd.get_dummies(df_college, columns<span class="op">=</span>[<span class="st">"CarnegieClassification"</span>])<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>df_college_dummies_type</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
 <div id="df-c5aba40c-3660-4cd2-b3c1-190fbf623853" class="colab-df-container">
     <div>
@@ -5743,11 +5735,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Warning: Total number of columns (73) exceeds max_columns (20) limiting to first (20) columns.</code></pre>
 </div>
 </div>
-<div id="cell-46" class="cell" data-execution_count="63">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>inter_college<span class="op">=</span>df_college_scaled.merge(df_college_dummies_ownership[<span class="st">"Ownership_Public"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-45" class="cell" data-execution_count="63">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>inter_college<span class="op">=</span>df_college_scaled.merge(df_college_dummies_ownership[<span class="st">"Ownership_Public"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-47" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="e1bf4950-4fe7-4226-d487-e26ecc3e99af" data-execution_count="64">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>inter_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="e1bf4950-4fe7-4226-d487-e26ecc3e99af" data-execution_count="64">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>inter_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <div id="df-90f56984-fd42-4902-93da-ca1e8e096795" class="colab-df-container">
     <div>
@@ -5974,11 +5966,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-48" class="cell" data-execution_count="66">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>final_college<span class="op">=</span>inter_college.merge(df_college_dummies_type[<span class="st">"CarnegieClassification_Master's Colleges &amp; Universities: Larger Programs"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-47" class="cell" data-execution_count="66">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>final_college<span class="op">=</span>inter_college.merge(df_college_dummies_type[<span class="st">"CarnegieClassification_Master's Colleges &amp; Universities: Larger Programs"</span>].to_frame(), left_index<span class="op">=</span><span class="va">True</span>, right_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="bc9e622c-652f-4126-cb12-ccb2adeb198a" data-execution_count="67">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>final_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-48" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:455}}" data-outputid="bc9e622c-652f-4126-cb12-ccb2adeb198a" data-execution_count="67">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>final_college</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
 <div id="df-6127bd32-4a7a-40fa-864f-0a77432a508e" class="colab-df-container">
     <div>
@@ -6218,9 +6210,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="7f996207-8059-4a2d-dc2c-ef6e86545f35" data-execution_count="68">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((final_college<span class="op">-</span>final_college.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="7f996207-8059-4a2d-dc2c-ef6e86545f35" data-execution_count="68">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((final_college<span class="op">-</span>final_college.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="68">
 <div>
 
@@ -6288,9 +6280,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-51" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="b52d49e4-9b0a-49ec-dcab-1f9ca20a57ee" data-execution_count="69">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="b52d49e4-9b0a-49ec-dcab-1f9ca20a57ee" data-execution_count="69">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="69">
 <div>
 
@@ -6361,10 +6353,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>CUNY Hunter College, UCSB, and CUNY Bernard M Barush College are the three most similar universities to Cal Poly by these metrics.</p>
 <p>3. The columns whose names begin with “PCIP” contain the proportions of students at each school studying various fields (e.g., Engineering, Psychology). Each field is represented by a two-digit code called the <a href="https://nces.ed.gov/ipeds/cipcode/browse.aspx?y=55">CIP code</a>.</p>
 <p>If we only consider the proportions of students studying various fields, what schools are most similar to Cal Poly? Specify how you’re making this decision.</p>
-<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:524}}" data-outputid="9a0ad678-ce35-4c9b-a797-e17a1c697881" data-execution_count="70">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create datafram with institution and all PCIP's</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df_college_PCIP<span class="op">=</span>df_college[df_college.columns[df_college.columns.<span class="bu">str</span>.startswith(<span class="st">"PCIP"</span>)]]</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df_college_PCIP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:524}}" data-outputid="9a0ad678-ce35-4c9b-a797-e17a1c697881" data-execution_count="70">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create datafram with institution and all PCIP's</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df_college_PCIP<span class="op">=</span>df_college[df_college.columns[df_college.columns.<span class="bu">str</span>.startswith(<span class="st">"PCIP"</span>)]]</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>df_college_PCIP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="70">
 <div id="df-83a2164d-1386-481e-9bd0-a73c70916f77" class="colab-df-container">
     <div>
@@ -6825,10 +6817,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:804}}" data-outputid="bb6609e7-1cc7-4636-89bc-709a619b39f0" data-execution_count="72">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>df_college_PCIP_scaled <span class="op">=</span> (df_college_PCIP <span class="op">-</span> df_college_PCIP.mean()) <span class="op">/</span> df_college_PCIP.std()</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>df_college_PCIP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-54" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:804}}" data-outputid="bb6609e7-1cc7-4636-89bc-709a619b39f0" data-execution_count="72">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Standardize the variables</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df_college_PCIP_scaled <span class="op">=</span> (df_college_PCIP <span class="op">-</span> df_college_PCIP.mean()) <span class="op">/</span> df_college_PCIP.std()</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df_college_PCIP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="72">
 <div id="df-501e9e44-689a-42cd-b8d4-09e44379e630" class="colab-df-container">
     <div>
@@ -7289,9 +7281,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 </div>
-<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="6faccd79-b3be-4755-e4bd-005a2f6fc68d" data-execution_count="73">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((df_college_PCIP_scaled<span class="op">-</span>df_college_PCIP_scaled.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="6faccd79-b3be-4755-e4bd-005a2f6fc68d" data-execution_count="73">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dist<span class="op">=</span>np.sqrt((df_college_PCIP_scaled<span class="op">-</span>df_college_PCIP_scaled.loc[school_name]) <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>dist</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="73">
 <div>
 
@@ -7359,9 +7351,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div><br><label><b>dtype:</b> float64</label>
 </div>
 </div>
-<div id="cell-57" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="cacf2a83-267d-4a00-d3b4-a909202e2ab4" data-execution_count="74">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cell-56" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:489}}" data-outputid="cacf2a83-267d-4a00-d3b4-a909202e2ab4" data-execution_count="74">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sorteddistance<span class="op">=</span>dist.sort_values(ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>sorteddistance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="74">
 <div>
 
